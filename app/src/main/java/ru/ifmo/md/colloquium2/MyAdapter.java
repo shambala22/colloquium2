@@ -33,7 +33,7 @@ public class MyAdapter extends ArrayAdapter<Candidates> {
         TextView surname = (TextView) elementView.findViewById(R.id.surname);
         TextView votes = (TextView) elementView.findViewById(R.id.votes);
         TextView percent = (TextView) elementView.findViewById(R.id.percent);
-        Button button = (Button) elementView.findViewById(R.id.percent);
+        Button button = (Button) elementView.findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
