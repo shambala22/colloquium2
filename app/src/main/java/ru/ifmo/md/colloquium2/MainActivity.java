@@ -57,9 +57,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
             do {
                 list.add(new Candidates(cursor.getString(ind)));
             } while (cursor.moveToNext());
+            adapter = new MyAdapter(this, list);
+            listView.setAdapter(adapter);
         }
-        adapter = new MyAdapter(this, list);
-        listView.setAdapter(adapter);
+
 
     }
 

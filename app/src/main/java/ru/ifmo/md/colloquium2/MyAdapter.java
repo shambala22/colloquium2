@@ -2,6 +2,7 @@ package ru.ifmo.md.colloquium2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,12 @@ public class MyAdapter extends ArrayAdapter<Candidates> {
     ArrayList<Candidates> items;
     boolean browser;
     int sumvotes = 0;
+    int size = 0;
 
     public MyAdapter(Context context, ArrayList<Candidates> items) {
         super(context, R.layout.list_element, items);
         this.context = context;
+        this.size = items.size();
     }
 
     @Override
@@ -34,16 +37,15 @@ public class MyAdapter extends ArrayAdapter<Candidates> {
         TextView votes = (TextView) elementView.findViewById(R.id.votes);
         TextView percent = (TextView) elementView.findViewById(R.id.percent);
         Button button = (Button) elementView.findViewById(R.id.button);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Candidates candidate = items.get(position);
+                Candidates candidate = getItem(position);
                 sumvotes++;
                 int vote = candidate.getVotes();
                 candidate.setVotes(vote+1);
-                for (int i = 0; i<items.size(); i++) {
-                    candidate = items.get(i);
+                for (int i = 0; i<size; i++) {
+                    candidate = getItem(i);
                     vote = candidate.getVotes();
                     int perc = (int) (((double)vote/sumvotes)*100);
                     candidate.setPercent(perc);
@@ -52,9 +54,9 @@ public class MyAdapter extends ArrayAdapter<Candidates> {
         });
 
 
-        surname.setText(items.get(position).getSurname());
-        votes.setText(items.get(position).getVotes() + " votes");
-        percent.setText(items.get(position).getPercent() + "%");
+        surname.setText(getItem(position).getSurname());
+        votes.setText(getItem(position).getVotes() + " votes");
+        percent.setText(getItem(position).getPercent() + "%");
         return elementView;
     }
 }
